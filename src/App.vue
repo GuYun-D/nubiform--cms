@@ -6,6 +6,8 @@
     <router-link to="/main">狐妖</router-link>
 
     <router-view></router-view>
+
+    <el-button type="primary" size="default">哈哈</el-button>
   </div>
 </template>
 
