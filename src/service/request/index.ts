@@ -49,7 +49,7 @@ class GYRequest {
         const data = res.data
         this.loading?.close()
         if (data.returnCode && data.returnCode === '-1001') {
-          console.log('请求失败')
+          // console.log('请求失败')
         } else {
           return res.data
         }
