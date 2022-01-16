@@ -6,22 +6,18 @@ const gyRequest = new GYRequest({
   timeout: TIME_OUT,
   interceptors: {
     requestInterceptor: (config) => {
-      console.log('请求成功')
       return config
     },
 
     requestInterceptorCatch: (error) => {
-      console.log('请求失败')
       return error
     },
 
     responseInterceptor: (res) => {
-      console.log('响应成功')
       return res
     },
 
     responseInterCeptorCatch: (error) => {
-      console.log('相应失败')
       return error
     },
   },
