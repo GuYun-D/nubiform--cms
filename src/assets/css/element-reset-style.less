@@ -1,0 +1,72 @@
+@mainColor: #1f3f64;
+@mainColor1: #14457c;
+@white: #fff;
+
+.login-panel {
+  .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
+    background-color: transparent !important;
+    border-color: @mainColor;
+    color: @white  !important;
+    font-weight: bold;
+  }
+
+  .el-tabs {
+    .el-tabs__header {
+      background-color: transparent;
+      border: none;
+
+      .el-tabs__nav-wrap {
+        .el-tabs__nav-scroll {
+          .el-tabs__nav {
+            .is-disabled {
+              cursor: not-allowed;
+              background-color: @mainColor;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .el-form {
+    label {
+      color: @white  !important;
+    }
+
+    .el-input__inner {
+      color: @white;
+      border-color: rgb(97, 97, 97);
+      background-color: transparent !important;
+    }
+  }
+
+  .acount-control{
+    label{
+      span {
+        color: @white;
+        .el-checkbox__inner{
+          background-color: transparent;
+          border-color: #14457c;
+        }
+      }
+    }
+
+    .el-link--inner{
+      color: @white;
+    }
+  }
+
+  .login-btn {
+    width: 100%;
+    height: 40px;
+    border-color: @mainColor;
+    background-color: @mainColor;
+    transition: all 350ms;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
