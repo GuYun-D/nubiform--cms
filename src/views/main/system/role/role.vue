@@ -11,7 +11,7 @@ export default defineComponent({
   name: 'role',
   setup() {
     return {}
-  }
+  },
 })
 </script>
 

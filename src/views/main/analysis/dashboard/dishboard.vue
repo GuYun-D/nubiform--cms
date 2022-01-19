@@ -11,7 +11,7 @@ export default defineComponent({
   name: 'dishboard',
   setup() {
     return {}
-  }
+  },
 })
 </script>
 

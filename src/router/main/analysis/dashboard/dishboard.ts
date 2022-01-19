@@ -3,5 +3,5 @@ export default {
   path: '/main/analysis/dashboard',
   name: 'dishboard',
   component: dishboard,
-  children: []
+  children: [],
 }
