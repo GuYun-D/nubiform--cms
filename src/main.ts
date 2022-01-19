@@ -9,8 +9,6 @@ import { setupState } from '@/store'
 import 'normalize.css'
 import '@/assets/css/index.less'
 
-import '@element-plus/icons-vue'
-
 setupState()
 
 const app = createApp(App)

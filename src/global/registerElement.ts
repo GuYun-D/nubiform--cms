@@ -12,6 +12,14 @@ import {
   ElInput,
   ElCheckbox,
   ElLink,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItemGroup,
+  ElMenuItem,
 } from 'element-plus'
 
 const components = [
@@ -25,6 +33,14 @@ const components = [
   ElInput,
   ElCheckbox,
   ElLink,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItemGroup,
+  ElMenuItem,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册
