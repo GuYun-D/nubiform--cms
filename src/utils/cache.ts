@@ -14,7 +14,7 @@ class LocalStorage {
     window.localStorage.removeItem(key)
   }
 
-  clearCache(){
+  clearCache() {
     window.localStorage.clear()
   }
 }

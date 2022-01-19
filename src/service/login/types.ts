@@ -23,19 +23,18 @@ export interface UserInfo {
 }
 
 export interface UserInfoDepartment {
-  id: number,
-  name: string,
-  parentId: null,
-  createAt: string,
+  id: number
+  name: string
+  parentId: null
+  createAt: string
   updateAt: string
 }
 
-
 export interface UserInfoRole {
-  id: number,
-  name: string,
-  intro: string,
-  createAt: string,
+  id: number
+  name: string
+  intro: string
+  createAt: string
   updateAt: string
 }
 
@@ -47,13 +46,13 @@ export interface HttpServerData<T = any> {
 
 // 用户菜单树
 export interface UserMenus {
-  children: UserMenuChild[],
-  icon: string,
-  id: number,
-  name: string,
-  sort: number,
-  type: number,
-  url: string,
+  children: UserMenuChild[]
+  icon: string
+  id: number
+  name: string
+  sort: number
+  type: number
+  url: string
 }
 
 export interface UserMenuChild {

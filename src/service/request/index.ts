@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import type { GYRequestConfig, GYRequestInterceptors } from './types'
-import { ElLoading } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 
 const DEFAULT_LOADING = true
 
@@ -48,7 +48,17 @@ class GYRequest {
       (res) => {
         const data = res.data
         this.loading?.close()
-        if (data.returnCode && data.returnCode === '-1001') {
+
+        if (!data) {
+          ElMessage({
+            message: '请检查网络是否正常连接',
+            type: 'error',
+            duration: 2000,
+            showClose: true,
+          })
+        }
+
+        if (data && data.returnCode && data.returnCode === '-1001') {
           // console.log('请求失败')
         } else {
           return res.data

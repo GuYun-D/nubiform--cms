@@ -30,8 +30,8 @@ module.export = {
           '/^api': '',
         },
 
-        changeOrigin: true
-      }
-    }
-  }
+        changeOrigin: true,
+      },
+    },
+  },
 }
