@@ -23,6 +23,11 @@ import {
   ElDropdown,
   ElDropdownItem,
   ElDropdownMenu,
+  ElCol,
+  ElRow,
+  ElSelect,
+  ElOption,
+  ElDatePicker,
 } from 'element-plus'
 
 const components = [
@@ -48,6 +53,11 @@ const components = [
   ElDropdownItem,
   ElDropdownMenu,
   ElAvatar,
+  ElCol,
+  ElRow,
+  ElSelect,
+  ElOption,
+  ElDatePicker,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册
