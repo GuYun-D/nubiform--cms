@@ -20,6 +20,9 @@ import {
   ElSubMenu,
   ElMenuItemGroup,
   ElMenuItem,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
 } from 'element-plus'
 
 const components = [
@@ -41,6 +44,10 @@ const components = [
   ElSubMenu,
   ElMenuItemGroup,
   ElMenuItem,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElAvatar,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册
