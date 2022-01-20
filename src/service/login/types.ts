@@ -46,7 +46,7 @@ export interface HttpServerData<T = any> {
 
 // 用户菜单树
 export interface UserMenus {
-  children: UserMenuChild[]
+  children: any
   icon: string
   id: number
   name: string

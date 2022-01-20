@@ -1,6 +1,6 @@
 const path = require('path')
 
-module.export = {
+module.exports = {
   outputDir: './build',
 
   chainWebpack: (config) => {

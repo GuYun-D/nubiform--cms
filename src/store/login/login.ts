@@ -10,6 +10,7 @@ import {
 } from '@/service/login/login'
 import type { Account, UserInfo, UserMenus } from '@/service/login/types'
 import localCache from '@/utils/cache'
+import { mapMenusToRoutes } from '@/utils/map-menus'
 
 const loginModule: Module<LoginModule, RootState> = {
   namespaced: true,
@@ -32,6 +33,14 @@ const loginModule: Module<LoginModule, RootState> = {
 
     [LoginMutations.CHANGE_USER_MENUS](state, userMenus: UserMenus[]) {
       state.userMenus = userMenus
+
+      // 路由映射
+      const routes = mapMenusToRoutes(userMenus)
+
+      // 将路由动态添加到路由中
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     },
   },
 

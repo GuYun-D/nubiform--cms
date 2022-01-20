@@ -10,8 +10,13 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/login/login.vue'),
   },
   {
+    name: 'main',
     path: '/main',
     component: () => import('@/views/main/main.vue'),
+  },
+  {
+    path: '/:pathMach(.*)*',
+    component: import('@/views/not-found/index.vue'),
   },
 ]
 
