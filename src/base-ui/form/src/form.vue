@@ -1,5 +1,8 @@
 <template>
   <div class="gy-form">
+    <div class="form-header">
+      <slot name="header"></slot>
+    </div>
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
@@ -53,6 +56,9 @@
         </template>
       </el-row>
     </el-form>
+    <div class="form-footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -75,7 +81,7 @@ export default defineComponent({
     itemStyle: {
       type: Object,
       default: () => ({
-        padding: '10px 30px',
+        padding: '10px 10px',
       }),
     },
 

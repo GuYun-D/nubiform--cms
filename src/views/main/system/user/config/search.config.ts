@@ -1,6 +1,6 @@
 import { GYForm } from '@/base-ui/form'
 
-export const searchFornCinfig: GYForm = {
+export const searchFormConfig: GYForm = {
   formItems: [
     {
       field: 'name',

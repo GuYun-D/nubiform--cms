@@ -1,33 +1,24 @@
 <template>
   <div class="user">
-    <div class="search">
-      <gy-form :="searchFornCinfig" v-model="formData"></gy-form>
-    </div>
+    <PageSearch :searchFormConfig="searchFormConfig"></PageSearch>
     <div class="content"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import GyForm from '../.././../../base-ui/form'
-import { searchFornCinfig } from './config/search.config'
+import { defineComponent } from 'vue'
+import { searchFormConfig } from './config/search.config'
+import PageSearch from '../../../../components/page-search'
 
 export default defineComponent({
   name: 'user',
   components: {
-    GyForm,
+    PageSearch,
   },
   setup() {
-    //  必须使用ref，reactive做vmodel存在一定问题
-    const formData = ref({
-      name: '',
-      password: '',
-      sport: '',
-      createAt: '',
-    })
-    return { searchFornCinfig, formData }
+    return { searchFormConfig }
   },
 })
 </script>
 
-<style scoped></style>
+<style scoped lang="less"></style>
