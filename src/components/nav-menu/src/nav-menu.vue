@@ -9,7 +9,7 @@
       background-color="#1c2b4a"
       class="el-menu-vertical"
       :collapse="!collapse"
-      default-active="2"
+      :default-active="defaultMenu"
       text-color="#fff"
     >
       <template v-for="item in userMenus" :key="item.id">
@@ -46,10 +46,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 import { useStore } from '../../../store'
 import type { UserMenus } from '../../../service/login/types'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { pathMapToMenu } from '../../../utils/map-menus'
 
 export default defineComponent({
   props: {
@@ -62,10 +63,15 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const router = useRouter()
+    const route = useRoute()
 
     const userMenus = computed(() => {
       return store.state.login.userMenus
     })
+
+    const currentPage = route.path
+    const menu = pathMapToMenu(userMenus.value, currentPage)
+    const defaultMenu = ref(menu?.id + '')
 
     const handleMenuItemClick = (item: UserMenus) => {
       router.push({
@@ -73,7 +79,7 @@ export default defineComponent({
       })
     }
 
-    return { userMenus, handleMenuItemClick }
+    return { userMenus, handleMenuItemClick, defaultMenu }
   },
 })
 </script>
