@@ -7,29 +7,40 @@
     ></i>
 
     <div class="content">
-      <div>面包屑</div>
+      <GyBreadcrumb :breadcrumbs="breadcrumbs"></GyBreadcrumb>
       <UserInfo></UserInfo>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import UserInfo from './components/user-info.vue'
+import GyBreadcrumb from '../../../base-ui/breadcrumb'
+import { pathMapBreadcrumbToMenu } from '../../../utils/map-menus'
+import { useStore } from '../../../store'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
   emits: ['foldChage'],
   components: {
     UserInfo,
+    GyBreadcrumb,
   },
   setup(_, { emit }) {
     const isFold = ref(false)
+    const store = useStore()
+    const route = useRoute()
+
+    const breadcrumbs = computed(() => {
+      return pathMapBreadcrumbToMenu(store.state.login.userMenus, route.path)
+    })
+
     const handleFold = () => {
       isFold.value = !isFold.value
-
       emit('foldChage', isFold.value)
     }
-    return { handleFold, isFold }
+    return { handleFold, isFold, breadcrumbs }
   },
 })
 </script>

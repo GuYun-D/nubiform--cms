@@ -1,3 +1,4 @@
+import { GYBreadcrumb } from '@/base-ui/breadcrumb'
 import type { UserMenus } from '@/service/login/types'
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -49,6 +50,21 @@ export function mapMenusToRoutes(userMenus: UserMenus[]): RouteRecordRaw[] {
 }
 
 /**
+ * 获取面包屑的数据
+ * @param userMenus
+ * @param currentPath
+ * @returns 面包屑数据数组
+ */
+export function pathMapBreadcrumbToMenu(
+  userMenus: UserMenus[],
+  currentPath: string
+): GYBreadcrumb[] {
+  const breadcrumbs: GYBreadcrumb[] = []
+  pathMapToMenu(userMenus, currentPath, breadcrumbs)
+  return breadcrumbs
+}
+
+/**
  * 用于动态修改menu组件的default-active的值
  * 菜单栏的默认显示在刷新的时候显示的是死的active，使用该函数当active发生变化时动态修改active的值
  * @param userMenus 总的用户菜单
@@ -57,12 +73,20 @@ export function mapMenusToRoutes(userMenus: UserMenus[]): RouteRecordRaw[] {
  */
 export function pathMapToMenu(
   userMenus: UserMenus[],
-  currentPath: string
+  currentPath: string,
+  breadcrumbs?: GYBreadcrumb[]
 ): UserMenus | undefined {
   for (const menu of userMenus) {
     if (menu.type === 1) {
       const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
       if (findMenu) {
+        breadcrumbs?.push({
+          name: menu.name,
+        })
+
+        breadcrumbs?.push({
+          name: findMenu.name,
+        })
         return findMenu
       }
     } else if (menu.type === 2 && menu.url === currentPath) {

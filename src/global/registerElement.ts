@@ -28,6 +28,8 @@ import {
   ElSelect,
   ElOption,
   ElDatePicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
 } from 'element-plus'
 
 const components = [
@@ -58,6 +60,8 @@ const components = [
   ElSelect,
   ElOption,
   ElDatePicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册
