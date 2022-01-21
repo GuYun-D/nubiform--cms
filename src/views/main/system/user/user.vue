@@ -1,14 +1,14 @@
 <template>
   <div class="user">
     <div class="search">
-      <gy-form :="searchFornCinfig"></gy-form>
+      <gy-form :="searchFornCinfig" v-model="formData"></gy-form>
     </div>
     <div class="content"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import GyForm from '../.././../../base-ui/form'
 import { searchFornCinfig } from './config/search.config'
 
@@ -18,7 +18,14 @@ export default defineComponent({
     GyForm,
   },
   setup() {
-    return { searchFornCinfig }
+    //  必须使用ref，reactive做vmodel存在一定问题
+    const formData = ref({
+      name: '',
+      password: '',
+      sport: '',
+      createAt: '',
+    })
+    return { searchFornCinfig, formData }
   },
 })
 </script>

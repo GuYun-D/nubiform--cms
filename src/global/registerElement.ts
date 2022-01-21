@@ -54,7 +54,6 @@ const components = [
   ElDropdown,
   ElDropdownItem,
   ElDropdownMenu,
-  ElAvatar,
   ElCol,
   ElRow,
   ElSelect,

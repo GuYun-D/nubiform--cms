@@ -3,6 +3,7 @@ import { GYForm } from '@/base-ui/form'
 export const searchFornCinfig: GYForm = {
   formItems: [
     {
+      field: 'name',
       label: '用户名',
       placeholder: '请输入用户名',
       type: 'input',
@@ -11,6 +12,7 @@ export const searchFornCinfig: GYForm = {
       label: '密码',
       placeholder: '请输入密码',
       type: 'password',
+      field: 'password',
     },
     {
       label: '喜欢的运动',
@@ -26,6 +28,7 @@ export const searchFornCinfig: GYForm = {
           value: 'football',
         },
       ],
+      field: 'sport',
     },
     {
       label: '创建时间',
@@ -35,6 +38,7 @@ export const searchFornCinfig: GYForm = {
         endPlaceholder: '结束时间',
         type: 'daterange',
       },
+      field: 'createAt',
     },
   ],
 

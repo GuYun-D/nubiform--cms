@@ -20,6 +20,7 @@
                 <el-input
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
+                  v-model="formData[`${item.field}`]"
                 ></el-input>
               </template>
 
@@ -28,11 +29,12 @@
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
                   style="width: 100%"
+                  v-model="formData[`${item.field}`]"
                 >
                   <el-option
                     v-for="option in item.options"
                     :key="option.label"
-                    :value="item.value"
+                    :value="option.value"
                   >
                     {{ option.title }}
                   </el-option>
@@ -43,6 +45,7 @@
                 <el-date-picker
                   :="item.otherOptions"
                   style="width: 100%"
+                  v-model="formData[`${item.field}`]"
                 ></el-date-picker>
               </template>
             </el-form-item>
@@ -54,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { ref, defineComponent, PropType, watch } from 'vue'
 import type { GYFormItem } from './types'
 
 export default defineComponent({
@@ -86,10 +89,30 @@ export default defineComponent({
         xs: 24,
       }),
     },
+
+    modelValue: {
+      type: Object,
+      required: true,
+    },
   },
 
-  setup() {
-    return {}
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    // 拷贝出一个新的对象，不然又是违反了单向数据流
+    const formData = ref({ ...props.modelValue })
+
+    // 监听formData对象的改变
+    watch(
+      formData,
+      (newFormDate) => {
+        emit('update:modelValue', newFormDate)
+      },
+      {
+        deep: true,
+      }
+    )
+
+    return { formData }
   },
 })
 </script>

@@ -1,6 +1,7 @@
 type FormType = 'input' | 'password' | 'select' | 'datepicker' | 'number'
 
 export interface GYFormItem<T = any> {
+  field: string
   type: FormType
   label: string
   rules?: any[]

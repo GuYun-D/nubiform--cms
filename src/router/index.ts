@@ -12,7 +12,7 @@ router.beforeEach((to) => {
   if (to.path !== '/login') {
     const token = LocalCache.getCache('TOKEN')
     if (!token) {
-      return '/main'
+      return '/login'
     }
   }
 
