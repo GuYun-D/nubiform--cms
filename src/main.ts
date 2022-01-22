@@ -9,13 +9,10 @@ import { setupState } from '@/store'
 import 'normalize.css'
 import '@/assets/css/index.less'
 
+const app = createApp(App)
 // 动态路由映射注册要早于app.use(router)
 setupState()
-
-const app = createApp(App)
-app.use(router)
 app.use(store)
-
 registerApp(app)
-
+app.use(router)
 app.mount('#app')

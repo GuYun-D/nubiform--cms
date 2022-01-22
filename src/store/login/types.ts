@@ -1,6 +1,6 @@
 import type { UserMenus } from '@/service/login/types'
 
-export interface LoginModule {
+export interface LoginState {
   token: string
   userInfo: any
   userMenus: UserMenus[]

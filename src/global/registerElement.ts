@@ -30,6 +30,8 @@ import {
   ElDatePicker,
   ElBreadcrumb,
   ElBreadcrumbItem,
+  ElTable,
+  ElTableColumn,
 } from 'element-plus'
 
 const components = [
@@ -61,6 +63,8 @@ const components = [
   ElDatePicker,
   ElBreadcrumb,
   ElBreadcrumbItem,
+  ElTable,
+  ElTableColumn,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册

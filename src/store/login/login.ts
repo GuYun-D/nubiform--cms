@@ -1,5 +1,5 @@
 import { Module } from 'vuex'
-import type { LoginModule } from './types'
+import type { LoginState } from './types'
 import { LoginMutations } from './types'
 import type { RootState } from '../types'
 import router from '@/router'
@@ -12,7 +12,7 @@ import type { Account, UserInfo, UserMenus } from '@/service/login/types'
 import localCache from '@/utils/cache'
 import { mapMenusToRoutes } from '@/utils/map-menus'
 
-const loginModule: Module<LoginModule, RootState> = {
+const loginModule: Module<LoginState, RootState> = {
   namespaced: true,
   state() {
     return {
@@ -69,9 +69,9 @@ const loginModule: Module<LoginModule, RootState> = {
     },
 
     loadLocalLogin({ commit }) {
-      const token = localCache.getCache('Token')
+      const token = localCache.getCache('TOKEN')
       if (token) {
-        commit(LoginMutations.CHANGE_TOKEN)
+        commit(LoginMutations.CHANGE_TOKEN, token)
       }
 
       const userInfo = localCache.getCache('USER_INFO')

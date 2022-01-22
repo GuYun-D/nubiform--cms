@@ -7,6 +7,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/login',
+    name: 'login',
     component: () => import('@/views/login/login.vue'),
   },
   {
@@ -16,7 +17,8 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/:pathMach(.*)*',
-    component: import('@/views/not-found/index.vue'),
+    name: 'not-found',
+    component: () => import('@/views/not-found/index.vue'),
   },
 ]
 

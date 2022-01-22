@@ -1,6 +1,7 @@
 import { createStore, useStore as useVuexStore } from 'vuex'
 import type { Store } from 'vuex'
 import login from './login/login'
+import system from './main/system/system'
 import type { MyStore } from './types'
 
 const store = createStore({
@@ -12,6 +13,7 @@ const store = createStore({
 
   modules: {
     login,
+    system,
   },
 })
 
