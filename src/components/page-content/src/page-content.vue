@@ -54,12 +54,17 @@ export default defineComponent({
       type: Object,
       required: true,
     },
+
+    pageName: {
+      type: String,
+      required: true,
+    },
   },
-  setup() {
+  setup(props) {
     const store = useStore()
 
     store.dispatch('system/getPageListAction', {
-      pageUrl: '/users/list',
+      pageName: props.pageName,
       queryInfo: {
         offset: 0,
         size: 10,

@@ -2,8 +2,8 @@ import { getPageListData } from '@/service/main/system/system'
 import { RootState } from '@/store/types'
 import { Module } from 'vuex'
 import type { SystemState, SystemPayload } from './types'
-import { SystemMutations } from './types'
 import type { UserInfo } from '@/service/main/system/types'
+import { mutationsCase } from '../../../utils/mutationsCase'
 
 const systemModule: Module<SystemState, RootState> = {
   namespaced: true,
@@ -11,32 +11,38 @@ const systemModule: Module<SystemState, RootState> = {
     return {
       userList: [],
       userCount: 0,
+      roleList: [],
+      roleCount: 0,
     }
   },
 
   mutations: {
-    [SystemMutations.CHANGE_USER_COUNT](state, count: number) {
+    changeUsersCount(state, count: number) {
       state.userCount = count
     },
 
-    [SystemMutations.CHANGE_USER_LIST](state, list: UserInfo[]) {
+    changeUsersList(state, list: UserInfo[]) {
       state.userList = list
+    },
+
+    changeRoleList(state, list: any[]) {
+      state.roleList = list
+    },
+
+    changeRoleCount(state, count: number) {
+      state.roleCount = count
     },
   },
 
   actions: {
     async getPageListAction({ commit }, payload: SystemPayload) {
-      const pageResult = await getPageListData(
-        payload.pageUrl,
-        payload.queryInfo
-      )
-
-      console.log(pageResult)
+      const pageUrl = `${payload.pageName}/list`
+      const pageResult = await getPageListData(pageUrl, payload.queryInfo)
 
       const { list, totalCount } = pageResult.data
 
-      commit(SystemMutations.CHANGE_USER_COUNT, totalCount)
-      commit(SystemMutations.CHANGE_USER_LIST, list)
+      commit(`change${mutationsCase(payload.pageName)}Count`, totalCount)
+      commit(`change${mutationsCase(payload.pageName)}List`, list)
     },
   },
 }

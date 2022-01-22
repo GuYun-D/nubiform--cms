@@ -8,6 +8,7 @@ import type { QueryInfo, PageListData } from './types'
  * @param queryInfo
  */
 export function getPageListData(url: string, queryInfo: QueryInfo) {
+  console.log(url)
   return gyRequest.post<HttpServerData<PageListData>>({
     url: url,
     data: queryInfo,

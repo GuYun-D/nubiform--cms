@@ -1,16 +1,20 @@
 import { QueryInfo } from '@/service/main/system/types'
 
 export interface SystemState {
-  userList: any[]
-  userCount: number
+  userList?: any[]
+  userCount?: number
+  roleList?: any[]
+  roleCount?: number
 }
 
 export interface SystemPayload {
-  pageUrl: string
+  pageName: string
   queryInfo: QueryInfo
 }
 
 export enum SystemMutations {
-  CHANGE_USER_LIST = 'changeUserList',
-  CHANGE_USER_COUNT = 'changeUserCount',
+  changeUsersList = 'CHANGE_USER_LIST',
+  changeUsersCount = 'CHANGE_USER_COUNT',
+  changeRoleList = 'CHANGE_ROLE_LIST',
+  changeRoleCount = 'CHANGE_ROLE_COUNT',
 }
