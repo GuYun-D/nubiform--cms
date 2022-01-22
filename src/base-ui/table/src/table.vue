@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="header">
+      <slot name="header">
+        <div class="title">
+          <h3>{{ title }}</h3>
+        </div>
+
+        <div class="hand">
+          <slot name="headerHandler"></slot>
+        </div>
+      </slot>
+    </div>
     <el-table
       :data="listData"
       border
@@ -34,6 +45,18 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="footer">
+      <el-pagination
+        v-model:currentPage="currentPage4"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="400"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -61,6 +84,11 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+
+    title: {
+      type: String,
+      default: '',
+    },
   },
   emits: ['selectionChange'],
   setup(props, { emit }) {
@@ -72,4 +100,15 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style scoped lang="less">
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.footer {
+  padding: 10px 0 5px 0;
+}
+</style>

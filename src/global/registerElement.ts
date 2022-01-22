@@ -32,6 +32,7 @@ import {
   ElBreadcrumbItem,
   ElTable,
   ElTableColumn,
+  ElPagination,
 } from 'element-plus'
 
 const components = [
@@ -65,6 +66,7 @@ const components = [
   ElBreadcrumbItem,
   ElTable,
   ElTableColumn,
+  ElPagination,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册
