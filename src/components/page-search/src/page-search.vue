@@ -2,13 +2,19 @@
   <div class="page-search">
     <gy-form :="searchFormConfig" v-model="formData">
       <template #header>
-        <h1 class="slot-header">用户搜索</h1>
+        <slot name="title">
+          <h1 class="slot-header">用户搜索</h1>
+        </slot>
       </template>
 
       <template #footer>
         <div class="slot-footer">
-          <el-button type="info" icon="el-icon-magic-stick">重置</el-button>
-          <el-button type="primary" icon="el-icon-search">搜索</el-button>
+          <el-button size="mini" type="info" icon="el-icon-magic-stick"
+            >重置</el-button
+          >
+          <el-button size="mini" type="primary" icon="el-icon-search"
+            >搜索</el-button
+          >
         </div>
       </template>
     </gy-form>

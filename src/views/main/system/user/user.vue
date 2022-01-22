@@ -30,9 +30,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="less">
-.content {
-  padding: 20px;
-  border-top: 20px solid #f5f5f5;
-}
-</style>
+<style scoped lang="less"></style>

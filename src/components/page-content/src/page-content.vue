@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <GyTable :listData="userList" :="contentTableConfig">
+  <div style="widt: 100%" class="content">
+    <GyTable :listData="dataList" :="contentTableConfig">
       <template #status="scope">
         <el-button
           size="mini"
@@ -71,20 +71,25 @@ export default defineComponent({
       },
     })
 
-    const userList = computed(() => {
-      return store.state.system.userList
+    const dataList = computed(() => {
+      return store.getters[`system/pageListData`](props.pageName)
     })
 
-    const userCount = computed(() => {
-      return store.state.system.userCount
+    const dataCount = computed(() => {
+      return store.getters[`system/pageListCount`](props.pageName)
     })
 
     return {
-      userList,
-      userCount,
+      dataList,
+      dataCount,
     }
   },
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.content {
+  padding: 20px;
+  border-top: 20px solid #f5f5f5;
+}
+</style>

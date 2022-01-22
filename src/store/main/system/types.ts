@@ -1,8 +1,8 @@
 import { QueryInfo } from '@/service/main/system/types'
 
 export interface SystemState {
-  userList?: any[]
-  userCount?: number
+  usersList?: any[]
+  usersCount?: number
   roleList?: any[]
   roleCount?: number
 }

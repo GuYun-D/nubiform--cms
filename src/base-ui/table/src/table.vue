@@ -35,7 +35,7 @@
         :key="propItem.id"
         :prop="propItem.prop"
         :label="propItem.label"
-        :width="propItem.minWidth"
+        :min-width="propItem.minWidth"
         align="center"
       >
         <template #default="scope">

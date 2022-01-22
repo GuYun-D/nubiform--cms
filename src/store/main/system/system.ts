@@ -9,8 +9,8 @@ const systemModule: Module<SystemState, RootState> = {
   namespaced: true,
   state() {
     return {
-      userList: [],
-      userCount: 0,
+      usersList: [],
+      usersCount: 0,
       roleList: [],
       roleCount: 0,
     }
@@ -18,11 +18,11 @@ const systemModule: Module<SystemState, RootState> = {
 
   mutations: {
     changeUsersCount(state, count: number) {
-      state.userCount = count
+      state.usersCount = count
     },
 
     changeUsersList(state, list: UserInfo[]) {
-      state.userList = list
+      state.usersList = list
     },
 
     changeRoleList(state, list: any[]) {
@@ -43,6 +43,19 @@ const systemModule: Module<SystemState, RootState> = {
 
       commit(`change${mutationsCase(payload.pageName)}Count`, totalCount)
       commit(`change${mutationsCase(payload.pageName)}List`, list)
+    },
+  },
+
+  getters: {
+    pageListData(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}List`]
+      }
+    },
+    pageListCount(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}Count`]
+      }
     },
   },
 }
