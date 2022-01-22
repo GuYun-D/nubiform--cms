@@ -4,7 +4,7 @@ export interface QueryInfo {
 }
 
 export interface PageListData {
-  list: UserInfo[],
+  list: UserInfo[]
   totalCount: number
 }
 

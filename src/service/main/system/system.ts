@@ -11,5 +11,6 @@ export function getPageListData(url: string, queryInfo: QueryInfo) {
   return gyRequest.post<HttpServerData<PageListData>>({
     url: url,
     data: queryInfo,
+    showLoading: false,
   })
 }

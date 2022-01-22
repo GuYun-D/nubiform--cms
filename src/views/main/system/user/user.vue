@@ -2,7 +2,23 @@
   <div class="user">
     <PageSearch :searchFormConfig="searchFormConfig"></PageSearch>
     <div class="content">
-      <GyTable :listData="userList" :propList="propList"></GyTable>
+      <GyTable :listData="userList" :propList="propList">
+        <template #status="scope">
+          <el-button
+            size="mini"
+            :type="scope.row.enable ? 'success' : 'danger'"
+            >{{ scope.row.enable ? '启用' : '禁用' }}</el-button
+          >
+        </template>
+
+        <template #createAt="scope">
+          <strong>{{ $filters.formatTime(scope.row.createAt) }}</strong>
+        </template>
+
+        <template #updateAt="scope">
+          <strong>{{ $filters.formatTime(scope.row.updateAt) }}</strong>
+        </template>
+      </GyTable>
     </div>
   </div>
 </template>
@@ -53,22 +69,25 @@ export default defineComponent({
       {
         prop: 'cellphone',
         label: '手机号码',
-        minWidth: '100',
+        minWidth: '160',
       },
       {
         prop: 'enable',
         label: '状态',
         minWidth: '100',
+        slotName: 'status',
       },
       {
         prop: 'createAt',
         label: '创建时间',
         minWidth: '250',
+        slotName: 'createAt',
       },
       {
         prop: 'updateAt',
         label: '更新时间',
         minWidth: '250',
+        slotName: 'updateAt',
       },
     ]
 

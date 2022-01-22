@@ -8,7 +8,13 @@
         :label="propItem.label"
         :width="propItem.minWidth"
         align="center"
-      />
+      >
+        <template #default="scope">
+          <slot :name="propItem.slotName" :row="scope.row">
+            {{ scope.row[propItem.prop] }}
+          </slot>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
