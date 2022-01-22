@@ -2,7 +2,12 @@
   <div class="user">
     <PageSearch :searchFormConfig="searchFormConfig"></PageSearch>
     <div class="content">
-      <GyTable :listData="userList" :propList="propList">
+      <GyTable
+        :listData="userList"
+        :propList="propList"
+        :showIndexClumn="showIndexClumn"
+        :showSelectColumn="showSelectColumn"
+      >
         <template #status="scope">
           <el-button
             size="mini"
@@ -91,7 +96,18 @@ export default defineComponent({
       },
     ]
 
-    return { searchFormConfig, userList, userCount, propList }
+    const showIndexClumn = true
+
+    const showSelectColumn = true
+
+    return {
+      searchFormConfig,
+      userList,
+      userCount,
+      propList,
+      showIndexClumn,
+      showSelectColumn,
+    }
   },
 })
 </script>
