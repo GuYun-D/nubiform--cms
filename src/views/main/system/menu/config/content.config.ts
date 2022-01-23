@@ -1,34 +1,32 @@
 export const contentTableConfig = {
-  showIndexClumn: true,
+  showIndexClumn: false,
   showSelectColumn: false,
-  title: '商品列表',
+  title: '菜单列表',
   propList: [
     {
       prop: 'name',
-      label: '商品名称',
-      minWidth: '120',
+      label: '菜单名称',
+      minWidth: '100',
     },
     {
-      prop: 'oldPrice',
-      label: '原价/元',
+      prop: 'type',
+      label: '类型',
       minWidth: '60',
     },
     {
-      prop: 'newPrice',
-      label: '现价/元',
-      minWidth: '60',
+      prop: 'url',
+      label: '菜单url',
+      minWidth: '100',
     },
     {
-      prop: 'imgUrl',
-      label: '商品图片',
+      prop: 'icon',
+      label: '菜单icon',
       minWidth: '100',
-      slotName: 'image',
     },
     {
-      prop: 'status',
-      label: '状态',
+      prop: 'permission',
+      label: '按钮权限',
       minWidth: '100',
-      slotName: 'status',
     },
     {
       prop: 'createAt',
@@ -48,4 +46,11 @@ export const contentTableConfig = {
       slotName: 'handler',
     },
   ],
+  childrenProps: {
+    rowKey: 'id',
+    treeProp: {
+      children: 'children',
+    },
+  },
+  showFooter: false,
 }

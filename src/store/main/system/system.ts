@@ -42,6 +42,14 @@ const systemModule: Module<SystemState, RootState> = {
     changeGoodsCount(state, count: number) {
       state.goodsCount = count
     },
+
+    changeMenuList(state, list: any[]) {
+      state.menuList = list
+    },
+
+    changeMenuCount(state, count: number) {
+      state.menuCount = count
+    },
   },
 
   actions: {

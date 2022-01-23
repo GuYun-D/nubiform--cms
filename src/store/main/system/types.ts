@@ -7,6 +7,8 @@ export interface SystemState {
   roleCount?: number
   goodsList?: any[]
   goodsCount?: number
+  menuList?: any[]
+  menuCount?: number
 }
 
 export interface SystemPayload {
@@ -20,5 +22,7 @@ export enum SystemMutations {
   changeRoleList = 'CHANGE_ROLE_LIST',
   changeRoleCount = 'CHANGE_ROLE_COUNT',
   changeGoodsList = 'CHANGE_GOODS_LIST',
-  changeGoodsCount = 'CHANGE_GOODS+COUNT'
+  changeGoodsCount = 'CHANGE_GOODS_COUNT',
+  changeMenuList = 'CHANGE_MENU_LIST',
+  changeMenuCount = 'CHANGE_MENU_COUNT',
 }
