@@ -47,11 +47,11 @@
     </el-table>
     <div class="footer">
       <el-pagination
-        v-model:currentPage="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
+        :currentPage="page.currentPage"
+        :page-sizes="[10, 20, 30, 40]"
+        :page-size="page.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
+        :total="listCount"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       >
@@ -89,13 +89,35 @@ export default defineComponent({
       type: String,
       default: '',
     },
+
+    listCount: {
+      type: Number,
+      required: true,
+    },
+
+    page: {
+      type: Object,
+      default: () => ({
+        currentPage: 0,
+        pageSize: 10,
+      }),
+    },
   },
-  emits: ['selectionChange'],
+  emits: ['selectionChange', 'update:page'],
   setup(props, { emit }) {
     const handleSelectionChange = (value: any) => {
       emit('selectionChange', value)
     }
-    return { handleSelectionChange }
+
+    const handleSizeChange = (pageSize: any) => {
+      emit('update:page', { pageSize, ...props.page })
+    }
+
+    const handleCurrentChange = (currentPage: number) => {
+      emit('update:page', { currentPage, ...props.page })
+    }
+
+    return { handleSelectionChange, handleCurrentChange, handleSizeChange }
   },
 })
 </script>

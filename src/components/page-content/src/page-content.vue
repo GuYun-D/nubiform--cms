@@ -1,6 +1,11 @@
 <template>
   <div style="widt: 100%" class="content">
-    <GyTable :listData="dataList" :="contentTableConfig">
+    <GyTable
+      :listData="dataList"
+      :="contentTableConfig"
+      :listCount="dataCount"
+      v-model:page="pageInfo"
+    >
       <template #status="scope">
         <el-button
           size="mini"
@@ -41,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, watch } from 'vue'
 import GyTable from '../../../base-ui/table'
 import { useStore } from '../../../store'
 
@@ -63,12 +68,22 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
 
+    const pageInfo = ref({
+      currentPage: 0,
+      pageSize: 10,
+    })
+
+    watch(
+      () => pageInfo,
+      () => getPageData()
+    )
+
     const getPageData = (queryInfo: any = {}) => {
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: 0,
-          size: 10,
+          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          size: pageInfo.value.pageSize,
           ...queryInfo,
         },
       })
@@ -87,6 +102,7 @@ export default defineComponent({
     return {
       dataList,
       dataCount,
+      pageInfo,
       getPageData,
     }
   },
