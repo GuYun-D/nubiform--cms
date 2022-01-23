@@ -9,10 +9,18 @@
 
       <template #footer>
         <div class="slot-footer">
-          <el-button size="mini" type="info" icon="el-icon-magic-stick"
+          <el-button
+            size="mini"
+            type="info"
+            icon="el-icon-magic-stick"
+            @click="handleResetClick"
             >重置</el-button
           >
-          <el-button size="mini" type="primary" icon="el-icon-search"
+          <el-button
+            size="mini"
+            type="primary"
+            icon="el-icon-search"
+            @click="handleQueryClick"
             >搜索</el-button
           >
         </div>
@@ -35,15 +43,42 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
-    //  必须使用ref，reactive做vmodel存在一定问题
-    const formData = ref({
-      name: '',
-      password: '',
-      sport: '',
-      createAt: '',
-    })
-    return { formData }
+  emits: ['resetBtnClick', 'queryBtnClick'],
+  setup(props, { emit }) {
+    // //  必须使用ref，reactive做vmodel存在一定问题
+    // const formData = ref({
+    //   name: '',
+    //   password: '',
+    //   sport: '',
+    //   createAt: '',
+    // })
+
+    /**
+     * 表单双向绑定的字段应根据searchFormConfig来进行收集
+     */
+    const formItem = props.searchFormConfig?.formItems ?? []
+    const formOriginData: any = {}
+    for (const item of formItem) {
+      formOriginData[item.field] = ''
+    }
+    const formData = ref(formOriginData)
+
+    /**
+     * 表单对象的重置，直接通过formData对象对其内部的属性进行赋值修改
+     */
+    const handleResetClick = () => {
+      for (const key in formOriginData) {
+        formData.value[`${key}`] = formOriginData[key]
+      }
+
+      emit('resetBtnClick')
+    }
+
+    const handleQueryClick = () => {
+      emit('queryBtnClick', formData.value)
+    }
+
+    return { formData, handleResetClick, handleQueryClick }
   },
 })
 </script>
