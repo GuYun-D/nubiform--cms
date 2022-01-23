@@ -4,6 +4,7 @@ export interface LoginState {
   token: string
   userInfo: any
   userMenus: UserMenus[]
+  permissions: string[]
 }
 
 export enum LoginMutations {

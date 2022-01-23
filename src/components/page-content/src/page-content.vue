@@ -25,17 +25,21 @@
 
       <template #handler>
         <div class="handle-b">
-          <el-button icon="el-icon-edit" size="mini" type="text"
+          <el-button icon="el-icon-edit" size="mini" type="text" v-if="isUpdate"
             >编辑</el-button
           >
-          <el-button icon="el-icon-delete" size="mini" type="text"
+          <el-button
+            icon="el-icon-delete"
+            size="mini"
+            type="text"
+            v-if="isDelete"
             >删除</el-button
           >
         </div>
       </template>
 
       <template #headerHandler>
-        <el-button type="primary" size="mini">新建用户</el-button>
+        <el-button type="primary" v-if="isCreate" size="mini">新建</el-button>
         <el-button
           type="success"
           icon="el-icon-refresh"
@@ -61,6 +65,7 @@
 import { defineComponent, computed, ref, watch } from 'vue'
 import GyTable from '../../../base-ui/table'
 import { useStore } from '../../../store'
+import { usePermission } from '../../../hooks/usePermission'
 
 export default defineComponent({
   components: {
@@ -80,6 +85,12 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
 
+    // 权限验证
+    const isCreate = usePermission(props.pageName, 'create')
+    const isUpdate = usePermission(props.pageName, 'update')
+    const isDelete = usePermission(props.pageName, 'delete')
+    const isQuery = usePermission(props.pageName, 'query')
+
     const pageInfo = ref({
       currentPage: 0,
       pageSize: 10,
@@ -91,6 +102,7 @@ export default defineComponent({
     )
 
     const getPageData = (queryInfo: any = {}) => {
+      if (!isQuery) return
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
@@ -128,6 +140,10 @@ export default defineComponent({
       pageInfo,
       getPageData,
       otherPropSlots,
+      isCreate,
+      isUpdate,
+      isDelete,
+      isQuery,
     }
   },
 })

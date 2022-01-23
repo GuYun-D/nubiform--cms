@@ -96,3 +96,26 @@ export function pathMapToMenu(
 }
 
 export { firstMenu }
+
+/**
+ * 获取用户权限按钮
+ * @param userMenus
+ * @returns
+ */
+export function mapMeunsToPermissions(userMenus: any[]): string[] {
+  const permissions: string[] = []
+
+  const _recurseGetPermissions = function (menus: any[]) {
+    for (const menu of menus) {
+      if (menu.type === 1 || menu.type === 2) {
+        _recurseGetPermissions(menu.children ?? [])
+      } else if (menu.type === 3) {
+        permissions.push(menu.permission)
+      }
+    }
+  }
+
+  _recurseGetPermissions(userMenus)
+
+  return permissions
+}
