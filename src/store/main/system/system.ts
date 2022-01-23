@@ -13,6 +13,8 @@ const systemModule: Module<SystemState, RootState> = {
       usersCount: 0,
       roleList: [],
       roleCount: 0,
+      goodsList: [],
+      goodsCount: 0,
     }
   },
 
@@ -32,6 +34,14 @@ const systemModule: Module<SystemState, RootState> = {
     changeRoleCount(state, count: number) {
       state.roleCount = count
     },
+
+    changeGoodsList(state, list: any[]) {
+      state.goodsList = list
+    },
+
+    changeGoodsCount(state, count: number) {
+      state.goodsCount = count
+    },
   },
 
   actions: {
@@ -49,6 +59,7 @@ const systemModule: Module<SystemState, RootState> = {
   getters: {
     pageListData(state) {
       return (pageName: string) => {
+        console.log(pageName)
         return (state as any)[`${pageName}List`]
       }
     },

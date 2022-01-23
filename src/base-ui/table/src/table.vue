@@ -37,6 +37,7 @@
         :label="propItem.label"
         :min-width="propItem.minWidth"
         align="center"
+        show-overflow-tooltip
       >
         <template #default="scope">
           <slot :name="propItem.slotName" :row="scope.row">

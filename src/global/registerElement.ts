@@ -33,6 +33,7 @@ import {
   ElTable,
   ElTableColumn,
   ElPagination,
+  ElImage,
 } from 'element-plus'
 
 const components = [
@@ -67,6 +68,7 @@ const components = [
   ElTable,
   ElTableColumn,
   ElPagination,
+  ElImage,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册

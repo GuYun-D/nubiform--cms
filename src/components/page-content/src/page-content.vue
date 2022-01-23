@@ -6,6 +6,7 @@
       :listCount="dataCount"
       v-model:page="pageInfo"
     >
+      <!-- 固定插槽 -->
       <template #status="scope">
         <el-button
           size="mini"
@@ -40,6 +41,17 @@
           icon="el-icon-refresh"
           size="mini"
         ></el-button>
+      </template>
+
+      <!-- 动态插槽 -->
+      <template
+        v-for="item in otherPropSlots"
+        :key="item.label"
+        #[item.slotName]="scope"
+      >
+        <template v-if="item.slotName">
+          <slot :name="item.slotName" :row="scope.row"></slot>
+        </template>
       </template>
     </GyTable>
   </div>
@@ -99,11 +111,23 @@ export default defineComponent({
       return store.getters[`system/pageListCount`](props.pageName)
     })
 
+    // 获取动态的插槽
+    const otherPropSlots = props.contentTableConfig?.propList.filter(
+      (item: any) => {
+        if (item.slotName === 'status') return false
+        if (item.slotName === 'createAt') return false
+        if (item.slotName === 'updateAt') return false
+        if (item.slotName === 'handler') return false
+        return true
+      }
+    )
+
     return {
       dataList,
       dataCount,
       pageInfo,
       getPageData,
+      otherPropSlots,
     }
   },
 })
