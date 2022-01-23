@@ -1,7 +1,7 @@
-import { getPageListData } from '@/service/main/system/system'
+import { getPageListData, deletePageData } from '@/service/main/system/system'
 import { RootState } from '@/store/types'
 import { Module } from 'vuex'
-import type { SystemState, SystemPayload } from './types'
+import type { SystemState, SystemPayload, DeletePayload } from './types'
 import type { UserInfo } from '@/service/main/system/types'
 import { mutationsCase } from '../../../utils/mutationsCase'
 
@@ -61,6 +61,20 @@ const systemModule: Module<SystemState, RootState> = {
 
       commit(`change${mutationsCase(payload.pageName)}Count`, totalCount)
       commit(`change${mutationsCase(payload.pageName)}List`, list)
+    },
+
+    async deletePageDataAction({ dispatch }, payload: DeletePayload) {
+      const { pageName, id } = payload
+      const url = `/${pageName}/${id}`
+      await deletePageData(url)
+      // 书信
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10,
+        },
+      })
     },
   },
 

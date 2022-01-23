@@ -15,3 +15,13 @@ export function getPageListData(url: string, queryInfo: QueryInfo) {
     showLoading: false,
   })
 }
+
+
+/**
+ * 删除操作
+ */
+export function deletePageData(url: string) {
+  return gyRequest.delete<HttpServerData>({
+    url: url
+  })
+}

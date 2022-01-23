@@ -23,7 +23,7 @@
         <strong>{{ $filters.formatTime(scope.row.updateAt) }}</strong>
       </template>
 
-      <template #handler>
+      <template #handler="scope">
         <div class="handle-b">
           <el-button icon="el-icon-edit" size="mini" type="text" v-if="isUpdate"
             >编辑</el-button
@@ -33,6 +33,7 @@
             size="mini"
             type="text"
             v-if="isDelete"
+            @click="handleDeleteClick(scope.row)"
             >删除</el-button
           >
         </div>
@@ -92,7 +93,7 @@ export default defineComponent({
     const isQuery = usePermission(props.pageName, 'query')
 
     const pageInfo = ref({
-      currentPage: 0,
+      currentPage: 1,
       pageSize: 10,
     })
 
@@ -106,7 +107,7 @@ export default defineComponent({
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
           size: pageInfo.value.pageSize,
           ...queryInfo,
         },
@@ -134,6 +135,13 @@ export default defineComponent({
       }
     )
 
+    const handleDeleteClick = (item: any) => {
+      store.dispatch('system/deletePageDataAction', {
+        pageName: props.pageName,
+        id: item.id,
+      })
+    }
+
     return {
       dataList,
       dataCount,
@@ -144,6 +152,7 @@ export default defineComponent({
       isUpdate,
       isDelete,
       isQuery,
+      handleDeleteClick,
     }
   },
 })

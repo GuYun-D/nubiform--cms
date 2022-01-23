@@ -16,6 +16,11 @@ export interface SystemPayload {
   queryInfo: QueryInfo
 }
 
+export interface DeletePayload {
+  pageName: string
+  id: number
+}
+
 export enum SystemMutations {
   changeUsersList = 'CHANGE_USER_LIST',
   changeUsersCount = 'CHANGE_USER_COUNT',
