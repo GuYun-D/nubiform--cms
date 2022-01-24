@@ -1,4 +1,5 @@
 import { GYBreadcrumb } from '@/base-ui/breadcrumb'
+import menu from '@/router/main/system/menu/menu'
 import type { UserMenus } from '@/service/login/types'
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -118,4 +119,26 @@ export function mapMeunsToPermissions(userMenus: any[]): string[] {
   _recurseGetPermissions(userMenus)
 
   return permissions
+}
+
+/**
+ * 用于获取角色的权限，用于编辑回显
+ * 只设置叶子节点
+ * @param menuList
+ */
+export function mapMenuLeafKeys(menuList: any[]): number[] {
+  const leafKeys: number[] = []
+
+  const _recurseGetLeaf = (menuList: any[]) => {
+    for (const menu of menuList) {
+      if (menu.children) {
+        _recurseGetLeaf(menu.children)
+      } else {
+        leafKeys.push(menu.id)
+      }
+    }
+  }
+  _recurseGetLeaf(menuList)
+  _recurseGetLeaf(menuList)
+  return leafKeys
 }

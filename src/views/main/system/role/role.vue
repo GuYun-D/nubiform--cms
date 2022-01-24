@@ -20,6 +20,7 @@
     >
       <div class="menu-tree">
         <el-tree
+          ref="elTreeRef"
           :data="menus"
           show-checkbox
           node-key="id"
@@ -32,8 +33,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useStore } from '../../../../store'
+import { mapMenuLeafKeys } from '../../../../utils/map-menus'
+import { ElTree } from 'element-plus'
+
 import PageContent from '../../../../components/page-content'
 import { contentTableConfig } from './config/content.config'
 
@@ -52,8 +56,17 @@ export default defineComponent({
     PageModal,
   },
   setup() {
+    const elTreeRef = ref<InstanceType<typeof ElTree>>()
+    const editCb = (item: any) => {
+      const leafKeys = mapMenuLeafKeys(item.menuList)
+      nextTick(() => {
+        // 调用组件的方法来进行回显,要使用nexttick，因为elTreeRef的绑定要慢与editCb的回调
+        elTreeRef.value?.setCheckedKeys(leafKeys, false)
+      })
+    }
+
     const [pageModalRef, defaultInfo, handleNewData, handleEditData] =
-      usePageModal()
+      usePageModal(undefined, editCb)
 
     const store = useStore()
     const menus = computed(() => {
@@ -79,6 +92,7 @@ export default defineComponent({
       handleEditData,
       menus,
       otherInfo,
+      elTreeRef,
       handleCheckChange,
     }
   },
