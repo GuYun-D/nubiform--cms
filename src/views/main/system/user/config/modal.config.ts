@@ -13,6 +13,12 @@ export const modalConfig = {
       field: 'realname',
     },
     {
+      label: '密码',
+      placeholder: '请输入密码',
+      type: 'password',
+      field: 'password',
+    },
+    {
       label: '电话号码',
       placeholder: '请输入电话号码',
       type: 'input',

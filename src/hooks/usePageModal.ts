@@ -5,6 +5,7 @@ export function usePageModal() {
   const defaultInfo = ref({})
   const pageModalRef = ref<InstanceType<typeof PageModal>>()
   const handleNewData = () => {
+    defaultInfo.value = {}
     if (pageModalRef.value) {
       pageModalRef.value.dialogVisible = true
     }
@@ -15,6 +16,5 @@ export function usePageModal() {
       pageModalRef.value.dialogVisible = true
     }
   }
-
-  return [pageModalRef, defaultInfo, handleEditData, handleEditData]
+  return [pageModalRef, defaultInfo, handleNewData, handleEditData]
 }
