@@ -9,21 +9,30 @@
       :contentTableConfig="contentTableConfig"
       pageName="users"
       ref="pageContentRef"
+      @newBtnClick="handleNewData"
+      @editBtnClick="handleEditData"
     ></PageContent>
-    <PageModal :modalConfig="modalConfig"></PageModal>
+    <PageModal
+      :modalConfig="modalConfig"
+      ref="pageModalRef"
+      :defaultInfo="defaultInfo"
+    ></PageModal>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import PageContent from '../../../../components/page-content'
 import PageSearch from '../../../../components/page-search'
+import PageModal from '../../../../components/page-modal'
+
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
-import { usePageSearch } from '../../../../hooks/usePageSearch'
-
 import { modalConfig } from './config/modal.config'
-import PageModal from '../../../../components/page-modal'
+
+import { usePageSearch } from '../../../../hooks/usePageSearch'
+import { usePageModal } from '../../../../hooks/usePageModal'
 
 export default defineComponent({
   name: 'user',
@@ -34,6 +43,8 @@ export default defineComponent({
   },
   setup() {
     const [pageContentRef, handleQueryClick, handleResetClick] = usePageSearch()
+    const [pageModalRef, defaultInfo, handleNewData, handleEditData] =
+      usePageModal()
 
     return {
       pageContentRef,
@@ -42,6 +53,10 @@ export default defineComponent({
       handleQueryClick,
       handleResetClick,
       modalConfig,
+      pageModalRef,
+      defaultInfo,
+      handleNewData,
+      handleEditData,
     }
   },
 })

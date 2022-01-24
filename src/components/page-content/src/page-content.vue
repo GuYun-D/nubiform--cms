@@ -25,7 +25,12 @@
 
       <template #handler="scope">
         <div class="handle-b">
-          <el-button icon="el-icon-edit" size="mini" type="text" v-if="isUpdate"
+          <el-button
+            icon="el-icon-edit"
+            size="mini"
+            type="text"
+            v-if="isUpdate"
+            @click="handleEditClick(scope.row)"
             >编辑</el-button
           >
           <el-button
@@ -40,7 +45,13 @@
       </template>
 
       <template #headerHandler>
-        <el-button type="primary" v-if="isCreate" size="mini">新建</el-button>
+        <el-button
+          type="primary"
+          v-if="isCreate"
+          size="mini"
+          @click="handleNewClick"
+          >新建</el-button
+        >
         <el-button
           type="success"
           icon="el-icon-refresh"
@@ -83,7 +94,8 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  emits: ['newBtnClick', 'editBtnClick'],
+  setup(props, { emit }) {
     const store = useStore()
 
     // 权限验证
@@ -142,6 +154,14 @@ export default defineComponent({
       })
     }
 
+    const handleNewClick = () => {
+      emit('newBtnClick')
+    }
+
+    const handleEditClick = (item: any) => {
+      emit('editBtnClick', item)
+    }
+
     return {
       dataList,
       dataCount,
@@ -153,6 +173,8 @@ export default defineComponent({
       isDelete,
       isQuery,
       handleDeleteClick,
+      handleNewClick,
+      handleEditClick,
     }
   },
 })

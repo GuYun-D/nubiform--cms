@@ -4,9 +4,9 @@
       <GyForm :="modalConfig" v-model="formData"></GyForm>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">Cancel</el-button>
+          <el-button @click="dialogVisible = false">取消</el-button>
           <el-button type="primary" @click="dialogVisible = false"
-            >Confirm</el-button
+            >确定</el-button
           >
         </span>
       </template>
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import GyForm from '../../../base-ui/form'
 
 export default defineComponent({
@@ -27,14 +27,27 @@ export default defineComponent({
       type: Object,
       required: true,
     },
+
+    defaultInfo: {
+      type: Object,
+      required: true,
+    },
   },
-  setup() {
-    const dialogVisible = ref(true)
-    const formData = ref({
-      name: '',
-      realname: '',
-      cellphone: '',
-    })
+  setup(props) {
+    const dialogVisible = ref(false)
+    const formData = ref<any>({})
+
+    watch(
+      () => props.defaultInfo,
+      (newInfo) => {
+        console.log('执行了')
+
+        for (const item of props.modalConfig.formItems) {
+          formData.value[`${item.field}`] = newInfo[`${item.field}`]
+        }
+      }
+    )
+
     return { dialogVisible, formData }
   },
 })
