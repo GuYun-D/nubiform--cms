@@ -50,12 +50,15 @@ const loginModule: Module<LoginState, RootState> = {
   },
 
   actions: {
-    async acountLoginAction({ commit }, paylload: Account) {
+    async acountLoginAction({ commit, dispatch }, paylload: Account) {
       // 登录逻辑
       const loginResult = await accountLoginRequest(paylload)
       const { id, token } = loginResult.data
       commit(LoginMutations.CHANGE_TOKEN, token)
       localCache.setCache('TOKEN', token)
+
+      // 获取部门，用户列表数据
+      dispatch('getInitialDataAction', null, { root: true })
 
       // 获取用户信息
       const userInfoResult = await requestUserInfoById(id)
@@ -73,10 +76,12 @@ const loginModule: Module<LoginState, RootState> = {
       router.push('/main')
     },
 
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       const token = localCache.getCache('TOKEN')
       if (token) {
         commit(LoginMutations.CHANGE_TOKEN, token)
+        // 刷新也重新获取
+        dispatch('getInitialDataAction', null, { root: true })
       }
 
       const userInfo = localCache.getCache('USER_INFO')

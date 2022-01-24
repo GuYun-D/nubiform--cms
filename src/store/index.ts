@@ -52,7 +52,6 @@ const store = createStore({
 
 export function setupState() {
   store.dispatch('login/loadLocalLogin')
-  store.dispatch('getInitialDataAction')
 }
 
 export function useStore(): Store<MyStore> {
