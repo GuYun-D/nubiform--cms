@@ -5,6 +5,7 @@ export interface RootState {
   name?: string
   entireDepartment: any[]
   entireRole: any[]
+  entireMenu: any[]
 }
 
 export interface RootWidthModule {
@@ -18,4 +19,5 @@ export type MyStore = RootState & RootWidthModule
 export enum EntireDataMutations {
   changeEntireDepartment = 'CHANGE_ENTIRE_DEPARTMENT',
   changeEntireRole = 'CHANGE_ENTIRE_ROLE',
+  changeEntireMenu = 'CHANGE_ENTIRE_MENU',
 }

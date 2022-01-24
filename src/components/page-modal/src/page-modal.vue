@@ -8,6 +8,7 @@
       destroy-on-close
     >
       <GyForm :="modalConfig" v-model="formData"></GyForm>
+      <slot></slot>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
@@ -42,6 +43,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    otherInfo: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   setup(props) {
     const dialogVisible = ref(false)
@@ -50,8 +55,6 @@ export default defineComponent({
     watch(
       () => props.defaultInfo,
       (newInfo) => {
-        console.log('执行了')
-
         for (const item of props.modalConfig.formItems) {
           formData.value[`${item.field}`] = newInfo[`${item.field}`]
         }
@@ -67,14 +70,14 @@ export default defineComponent({
         // 编辑
         store.dispatch('system/editPageDataAction', {
           pageName: props.pageName,
-          editData: { ...formData.value },
+          editData: { ...formData.value, ...props.otherInfo },
           id: props.defaultInfo.id,
         })
       } else {
         // 新建
         store.dispatch('system/craetePageDataAction', {
           pageName: props.pageName,
-          newData: { ...formData.value },
+          newData: { ...formData.value, ...props.otherInfo },
         })
       }
     }

@@ -35,6 +35,7 @@ import {
   ElPagination,
   ElImage,
   ElDialog,
+  ElTree,
 } from 'element-plus'
 
 const components = [
@@ -71,6 +72,7 @@ const components = [
   ElPagination,
   ElImage,
   ElDialog,
+  ElTree,
 ]
 
 // 遍历components数组，进行element-plus标签全局注册

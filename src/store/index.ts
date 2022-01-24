@@ -12,6 +12,7 @@ const store = createStore({
       name: 'GuYun',
       entireDepartment: [],
       entireRole: [],
+      entireMenu: [],
     }
   },
 
@@ -22,6 +23,10 @@ const store = createStore({
 
     [EntireDataMutations.changeEntireRole](state, payload: any[]) {
       ;(state.entireRole as any[]) = payload
+    },
+
+    [EntireDataMutations.changeEntireMenu](state, payload: any[]) {
+      ;(state.entireMenu as any[]) = payload
     },
   },
 
@@ -39,8 +44,15 @@ const store = createStore({
       })
       const { list: roleList } = roleListResult.data
 
+      const menuListResult = await getPageListData('/menu/list', {
+        offset: 0,
+        size: 100,
+      })
+      const { list: menuList } = menuListResult.data
+
       commit(EntireDataMutations.changeEntireDepartment, departmentList)
       commit(EntireDataMutations.changeEntireRole, roleList)
+      commit(EntireDataMutations.changeEntireMenu, menuList)
     },
   },
 
