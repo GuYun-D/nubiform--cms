@@ -142,8 +142,8 @@ class GYRequest {
     return this.request<T>({ ...config, method: 'DELETE' })
   }
 
-  put<T>(config: GYRequestConfig): Promise<T> {
-    return this.request<T>({ ...config, method: 'PUT' })
+  patch<T>(config: GYRequestConfig): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
 

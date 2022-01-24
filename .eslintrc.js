@@ -22,5 +22,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     'eslint-plugin-vue': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off'
   },
 }

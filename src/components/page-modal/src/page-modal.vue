@@ -11,9 +11,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="dialogVisible = false"
-            >确定</el-button
-          >
+          <el-button type="primary" @click="handleConfirmClick">确定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -23,6 +21,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
 import GyForm from '../../../base-ui/form'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: {
@@ -36,6 +35,11 @@ export default defineComponent({
 
     defaultInfo: {
       type: Object,
+      required: true,
+    },
+
+    pageName: {
+      type: String,
       required: true,
     },
   },
@@ -54,7 +58,28 @@ export default defineComponent({
       }
     )
 
-    return { dialogVisible, formData }
+    // 确定
+    const store = useStore()
+    const handleConfirmClick = () => {
+      dialogVisible.value = false
+      // 区分新建还是编辑
+      if (Object.keys(props.defaultInfo).length) {
+        // 编辑
+        store.dispatch('system/editPageDataAction', {
+          pageName: props.pageName,
+          editData: { ...formData.value },
+          id: props.defaultInfo.id,
+        })
+      } else {
+        // 新建
+        store.dispatch('system/craetePageDataAction', {
+          pageName: props.pageName,
+          newData: { ...formData.value },
+        })
+      }
+    }
+
+    return { dialogVisible, formData, handleConfirmClick }
   },
 })
 </script>

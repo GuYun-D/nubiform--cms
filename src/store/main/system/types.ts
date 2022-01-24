@@ -21,6 +21,17 @@ export interface DeletePayload {
   id: number
 }
 
+export interface NewPayload {
+  pageName: string
+  newData: any
+}
+
+export interface EditPayload {
+  pageName: string
+  editData: any
+  id: number
+}
+
 export enum SystemMutations {
   changeUsersList = 'CHANGE_USER_LIST',
   changeUsersCount = 'CHANGE_USER_COUNT',

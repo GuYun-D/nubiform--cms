@@ -24,3 +24,25 @@ export function deletePageData(url: string) {
     url: url,
   })
 }
+
+/**
+ * 创建
+ */
+export function createPageData(url: string, newData: any) {
+  // console.log(url, newData)
+
+  return gyRequest.post<HttpServerData>({
+    url: url,
+    data: newData,
+  })
+}
+
+/**
+ * 编辑
+ */
+export function editPageData(url: string, editData: any) {
+  return gyRequest.patch<HttpServerData>({
+    url: url,
+    data: editData,
+  })
+}
