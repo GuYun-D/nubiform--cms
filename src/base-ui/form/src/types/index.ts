@@ -8,6 +8,7 @@ export interface GYFormItem<T = any> {
   placeholder?: string
   options?: SelectOption<T>[]
   otherOptions?: any
+  isHidden?: boolean
 }
 
 export interface SelectOption<T = any> {

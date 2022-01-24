@@ -12,6 +12,7 @@
               :rules="item.rules"
               class="form-item"
               :style="itemStyle"
+              v-if="!item.isHidden"
             >
               <template
                 v-if="

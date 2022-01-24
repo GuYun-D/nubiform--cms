@@ -17,6 +17,7 @@ export const modalConfig = {
       placeholder: '请输入密码',
       type: 'password',
       field: 'password',
+      isHidden: true,
     },
     {
       label: '电话号码',
