@@ -6,7 +6,7 @@
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
-          <el-col :="colLayput">
+          <el-col :="colLayout">
             <el-form-item
               :label="item.label"
               :rules="item.rules"
@@ -86,7 +86,7 @@ export default defineComponent({
       }),
     },
 
-    colLayput: {
+    colLayout: {
       type: Object,
       default: () => ({
         xl: 6,
@@ -94,6 +94,7 @@ export default defineComponent({
         md: 12,
         sm: 24,
         xs: 24,
+        span: 8,
       }),
     },
 

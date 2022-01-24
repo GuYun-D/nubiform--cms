@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useStore } from '../../../../store'
 
 import PageContent from '../../../../components/page-content'
 import PageSearch from '../../../../components/page-search'
@@ -57,6 +58,32 @@ export default defineComponent({
       )
       passwordItem!.isHidden = true
     }
+
+    /**
+     * 动态添加部门和角色列表
+     */
+    const store = useStore()
+    const departmentItem = modalConfig.formItems.find(
+      (item) => item.field === 'departmentId'
+    )
+
+    departmentItem!.options = store.state.entireDepartment.map((item) => {
+      return {
+        title: item.name,
+        value: item.id,
+      }
+    })
+
+    const roleItem = modalConfig.formItems.find(
+      (item) => item.field === 'roleId'
+    )
+
+    roleItem!.options = store.state.entireRole.map((item) => {
+      return {
+        title: item.name,
+        value: item.id,
+      }
+    })
 
     const [pageModalRef, defaultInfo, handleNewData, handleEditData] =
       usePageModal(newCallBack, editCallBack)

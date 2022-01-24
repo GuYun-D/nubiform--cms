@@ -1,4 +1,6 @@
-export const modalConfig = {
+import { GYForm } from '@/base-ui/form'
+
+export const modalConfig: GYForm = {
   formItems: [
     {
       field: 'name',
@@ -25,9 +27,23 @@ export const modalConfig = {
       type: 'input',
       field: 'cellphone',
     },
+    {
+      field: 'departmentId',
+      type: 'select',
+      label: '选择部门',
+      placeholder: '请选择部门',
+      options: [],
+    },
+    {
+      field: 'roleId',
+      type: 'select',
+      label: '选择角色',
+      placeholder: '请选择角色',
+      options: [],
+    },
   ],
 
-  colLayput: {
+  colLayout: {
     span: 24,
   },
 
